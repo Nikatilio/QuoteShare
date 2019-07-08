@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">QuoteShare</string>
+    <string name="screen_create_user_hint_name">Username</string>
+    <string name="screen_create_user_hint_email">E-mail</string>
+    <string name="screen_create_user_hint_password">Password</string>
+    <string name="screen_create_user_button_apply">Apply</string>
+    <string name="screen_login_button_login">Login</string>
+    <string name="screen_login_button_create_user">Create user</string>
 </resources>

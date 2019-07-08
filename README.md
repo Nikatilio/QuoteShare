@@ -1,0 +1,1 @@
+Android app to search, save, and share quotes from https://favqs.com
