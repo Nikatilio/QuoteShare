@@ -84,7 +84,7 @@ class ActivityUserCreate: AppCompatActivity() {
             }
             ////////////////
 
-            val authTokenType = ""
+            val authTokenType = "StandardUserAccessToken"
 
             if (authToken.isEmpty()) {
                 // Account can't be registered
