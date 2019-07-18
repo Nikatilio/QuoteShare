@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.os.HandlerThread
 import android.os.Message
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -21,8 +22,6 @@ import javax.net.ssl.HttpsURLConnection
 
 class ActivityLogin: AccountAuthenticatorActivity() {
 
-    private val REGISTER_CALL = 1
-
     private lateinit var accountManager: AccountManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,32 +32,12 @@ class ActivityLogin: AccountAuthenticatorActivity() {
 
         loginButton.setOnClickListener { onLogin() }
         registerButton.setOnClickListener { onCreateAccount() }
-
-        login()
-    }
-
-    fun login() {
-        val accountType = getString(R.string.account_type)
-        val accounts = accountManager.getAccountsByType(accountType)
-        if (accounts.isEmpty()) return
-
-        val authTokenType = "StandardUserAccessToken"
-
-        val options = Bundle()
-        accountManager.getAuthToken(
-            accounts[0],
-            authTokenType,
-            options,
-            this,
-            OnTokenAcquired(),
-            Handler(OnError())
-        )
     }
 
     fun onCreateAccount() {
-        val intent = Intent(this, ActivityUserCreate::class.java)
+//        val intent = Intent(this, ActivityUserCreate::class.java)
 //        intent.putExtras(getIntent().extras)
-        startActivityForResult(intent, REGISTER_CALL)
+//        startActivityForResult(intent, REGISTER_CALL)
     }
 
     fun onLogin() {
@@ -163,12 +142,12 @@ class ActivityLogin: AccountAuthenticatorActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (resultCode == Activity.RESULT_OK && requestCode == REGISTER_CALL) {
+        /*if (resultCode == Activity.RESULT_OK && requestCode == REGISTER_CALL) {
             Toast.makeText(this, "SUCCESSFUL REGISTRATION", Toast.LENGTH_LONG).show()
             println("SUCCESSFUL REGISTRATION")
         } else {
             super.onActivityResult(requestCode, resultCode, data)
-        }
+        }*/
     }
 
     class OnTokenAcquired: AccountManagerCallback<Bundle> {
