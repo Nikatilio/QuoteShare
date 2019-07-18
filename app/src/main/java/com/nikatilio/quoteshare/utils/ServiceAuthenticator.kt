@@ -7,6 +7,7 @@ import android.accounts.AccountManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import com.nikatilio.quoteshare.network.ServerCommunication
 import com.nikatilio.quoteshare.ui.login.ActivityLogin
 import java.util.*
 
@@ -47,7 +48,25 @@ class ServiceAuthenticator(val context: Context): AbstractAccountAuthenticator(c
 
         val accountManager = AccountManager.get(context)
 
-        val authToken = accountManager.peekAuthToken(account, authTokenType)
+        var authToken = accountManager.peekAuthToken(account, authTokenType)
+
+        val serverCommunication = ServerCommunication()
+
+        if (authToken.isNullOrEmpty()) {
+            val password = accountManager.getPassword(account)
+            if (!password.isNullOrEmpty()) {
+                authToken = serverCommunication.userSignIn(account!!.name, password, authTokenType)
+            }
+        } else {
+            // Check token
+            // If old, update
+            if (!serverCommunication.checkToken()) {
+                val password = accountManager.getPassword(account)
+                if (!password.isNullOrEmpty()) {
+                    authToken = serverCommunication.userSignIn(account!!.name, password, authTokenType)
+                }
+            }
+        }
 
         if (!authToken.isNullOrEmpty()) {
             val result = Bundle()
