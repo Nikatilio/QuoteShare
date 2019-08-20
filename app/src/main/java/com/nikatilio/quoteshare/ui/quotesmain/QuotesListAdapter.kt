@@ -7,9 +7,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.nikatilio.quoteshare.R
 import com.nikatilio.quoteshare.data.Quote
+import com.nikatilio.quoteshare.utils.inflate
 import kotlinx.android.synthetic.main.quotes_list_item.view.*
 
-class QuotesListAdapter(val context: Context): RecyclerView.Adapter<QuotesListAdapter.ViewHolder>() {
+class QuotesListAdapter(val context: Context): RecyclerView.Adapter<QuotesListAdapter.QuoteViewHolder>() {
 
     lateinit var quotes: List<Quote>
 
@@ -17,9 +18,9 @@ class QuotesListAdapter(val context: Context): RecyclerView.Adapter<QuotesListAd
         this.quotes = quotes
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.quotes_list_item, parent, false)
-        return ViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuoteViewHolder {
+        val view = parent.inflate(R.layout.quotes_list_item, false)
+        return QuoteViewHolder(view)
     }
 
     override fun getItemCount(): Int {
@@ -28,12 +29,15 @@ class QuotesListAdapter(val context: Context): RecyclerView.Adapter<QuotesListAd
         } else return 0
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.view.quoteText.text = quotes[position].text
+    override fun onBindViewHolder(holder: QuoteViewHolder, position: Int) {
+        holder.bindQuote(quotes[position])
     }
 
 
-    class ViewHolder(val view: View): RecyclerView.ViewHolder(view) {
+    class QuoteViewHolder(val view: View): RecyclerView.ViewHolder(view) {
 
+        fun bindQuote(quote: Quote) {
+            view.quoteText.text = quote.text
+        }
     }
 }
