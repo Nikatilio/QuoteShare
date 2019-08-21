@@ -4,8 +4,26 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.nikatilio.quoteshare.data.Quote
+import com.nikatilio.quoteshare.data.QuoteRepository
+import com.nikatilio.quoteshare.network.api.ApiFactory
+import com.nikatilio.quoteshare.network.api.User
+import com.nikatilio.quoteshare.network.api.UserCredentials
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 class QuotesListViewModel: ViewModel() {
+
+    private val parentJob = Job()
+
+    private val coroutineContext: CoroutineContext
+        get() = parentJob + Dispatchers.Default
+
+    private val scope = CoroutineScope(coroutineContext)
+
+    private val repository: QuoteRepository = QuoteRepository(ApiFactory.quotesApi)
 
     private val quotes: MutableLiveData<List<Quote>> by lazy {
         MutableLiveData<List<Quote>>().also {
@@ -17,13 +35,13 @@ class QuotesListViewModel: ViewModel() {
         return quotes
     }
 
+    /*
+    * Call QuotesApi in async mode and update quotes list
+    * */
     private fun loadQuotes() {
-        println("Loading users...")
-        Thread {
-            val list = ArrayList<Quote>()
-            list.add(Quote(0, "Why do we never have time to do it right, but always have time to do it over?"))
-            list.add(Quote(1, "Good judgment comes from experience, and experience comes from bad judgment"))
-            quotes.postValue(list)
-        }.start()
+        scope.launch {
+            val quotesList = repository.getQuotes()
+            quotes.postValue(quotesList.quotes)
+        }
     }
 }

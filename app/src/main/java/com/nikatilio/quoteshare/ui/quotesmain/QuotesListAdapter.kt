@@ -37,7 +37,7 @@ class QuotesListAdapter(val context: Context): RecyclerView.Adapter<QuotesListAd
     class QuoteViewHolder(val view: View): RecyclerView.ViewHolder(view) {
 
         fun bindQuote(quote: Quote) {
-            view.quoteText.text = quote.text
+            view.quoteText.text = quote.body
         }
     }
 }
