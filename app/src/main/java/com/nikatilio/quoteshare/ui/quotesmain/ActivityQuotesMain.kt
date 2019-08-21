@@ -23,10 +23,8 @@ class ActivityQuotesMain: AppCompatActivity() {
             // Update UI
             val adapter = quotesRecyclerView.adapter as QuotesListAdapter
             adapter.setQuotesList(it)
+            adapter.notifyDataSetChanged()
         })
-
-
-
     }
 
     override fun onDestroy() {
