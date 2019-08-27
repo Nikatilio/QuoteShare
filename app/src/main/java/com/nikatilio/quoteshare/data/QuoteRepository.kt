@@ -38,4 +38,6 @@ class QuoteRepository (private val api: QuotesAPI): BaseRepository() {
         // TODO Check if getQuotes result is correct
         return quotesResponse!!
     }
+
+
 }

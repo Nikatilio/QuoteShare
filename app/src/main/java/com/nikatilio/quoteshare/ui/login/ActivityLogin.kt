@@ -9,6 +9,7 @@ import android.os.HandlerThread
 import android.os.Message
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.nikatilio.quoteshare.BuildConfig
 import com.nikatilio.quoteshare.R
 import com.nikatilio.quoteshare.utils.ServiceAuthenticator
 import kotlinx.android.synthetic.main.activity_login.*
@@ -44,8 +45,8 @@ class ActivityLogin: AccountAuthenticatorActivity() {
 //        val username = loginNameEditText.text.toString()
 //        val password  = loginPassEditText.text.toString()
 
-        val username = "TestUserName1"
-        val password = "!234ABC"
+        val username = BuildConfig.TEST_LOGIN
+        val password = BuildConfig.TEST_PASSWORD
 
         var accountType = intent.getStringExtra(AccountManager.KEY_ACCOUNT_TYPE)
         if (accountType.isNullOrEmpty()) {
@@ -86,9 +87,9 @@ class ActivityLogin: AccountAuthenticatorActivity() {
     }
 
     fun createSession(result: (authToken: String) -> Unit) {
-        val username = "TestUserName1"
-        val password = "!234ABC"
-        val appToken = "e8a87992e9aed0055542bd2fe4c129e9"
+        val username = BuildConfig.TEST_LOGIN
+        val password = BuildConfig.TEST_PASSWORD
+        val appToken = BuildConfig.FAVQS_API_KEY
 
         Thread {
             try {

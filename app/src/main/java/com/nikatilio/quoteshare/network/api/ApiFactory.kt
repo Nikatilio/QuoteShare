@@ -8,11 +8,14 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
+/*
+ * ApiFactory sets http communication, creates retrofit objects, and initialized API interface
+ */
 object ApiFactory {
 
-    val interceptor = HttpLoggingInterceptor()
+    private val logInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
 
-    // Create Auth Interceptor to add api_key query in front of all requests
+    // Create Auth Interceptor to add app authorization token to every request
     private val authInterceptor = Interceptor { chain ->
         var appToken = AppConstants.favqsApiKey
 
@@ -21,21 +24,18 @@ object ApiFactory {
             .header("Authorization", "Token token=$appToken")
             .build()
 
-        interceptor.level = HttpLoggingInterceptor.Level.BODY
-
         chain.proceed(newRequest)
     }
-
 
     // OkHttpClient for building request url
     private val httpClient = OkHttpClient().newBuilder()
         .addInterceptor(authInterceptor)
-        .addInterceptor(interceptor)
+        .addInterceptor(logInterceptor)
         .build()
 
-    fun retrofit() : Retrofit = Retrofit.Builder()
+    private fun retrofit() : Retrofit = Retrofit.Builder()
         .client(httpClient)
-        .baseUrl("https://favqs.com/")
+        .baseUrl(AppConstants.baseApiUrl)
         .addConverterFactory(MoshiConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()
