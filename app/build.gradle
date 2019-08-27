@@ -27,10 +27,16 @@ android {
         Properties properties = new Properties()
         properties.load(project.rootProject.file("local.properties").newDataInputStream())
         def favqsApiKey = properties.getProperty("favqs_api_key", "")
+        def testLogin = properties.getProperty("test_login", "")
+        def testPassword = properties.getProperty("test_password", "")
 
         it.buildConfigField 'String', "FAVQS_API_KEY", favqsApiKey
+        it.buildConfigField 'String', "TEST_LOGIN", testLogin
+        it.buildConfigField 'String', "TEST_PASSWORD", testPassword
 
         it.resValue 'string', "api_key", favqsApiKey
+        it.resValue 'string', "test_login", testLogin
+        it.resValue 'string', "test_password", testPassword
     }
 }
 

@@ -4,6 +4,7 @@ import android.accounts.AccountManager
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.nikatilio.quoteshare.BuildConfig
 import com.nikatilio.quoteshare.R
 import com.nikatilio.quoteshare.utils.ServiceAuthenticator
 import org.json.JSONArray
@@ -26,11 +27,9 @@ class ActivityUserCreate: AppCompatActivity() {
     }
 
     fun createAccount() {
-        val username = "TestUserName1"
-        val password = "!234ABC"
-        val email = "kadeninexa@4simpleemail.com"
-        val appToken = "e8a87992e9aed0055542bd2fe4c129e9"
-        val userToken = "pBtGZBYxSX9cXZ4whkV28aKkSZ47mktlDZKDHu3Mp5wreYwq3+XcTvnlTWGyBWH2ZG87HxNTlkZ4aMNvWicsag=="
+        val username = BuildConfig.TEST_LOGIN
+        val password = BuildConfig.TEST_PASSWORD
+        val appToken = BuildConfig.FAVQS_API_KEY
 
 //        val accountType = intent.getStringExtra(AccountManager.KEY_ACCOUNT_TYPE)
         val accountType = "com.nikatilio.quoteshare"
@@ -52,7 +51,7 @@ class ActivityUserCreate: AppCompatActivity() {
 
                 val userJson = JSONObject()
                 userJson.put("login", username)
-                userJson.put("email", email)
+//                userJson.put("email", email)
                 userJson.put("password", password)
 
                 val jsonParam = JSONObject()

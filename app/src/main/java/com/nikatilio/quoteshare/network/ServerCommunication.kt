@@ -1,5 +1,6 @@
 package com.nikatilio.quoteshare.network
 
+import com.nikatilio.quoteshare.BuildConfig
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.DataOutputStream
@@ -24,7 +25,7 @@ class ServerCommunication {
 
     fun quoteOfTheDay(): String {
 
-        val appToken = "e8a87992e9aed0055542bd2fe4c129e9"
+        val appToken = BuildConfig.FAVQS_API_KEY
 
         Thread {
             try {
