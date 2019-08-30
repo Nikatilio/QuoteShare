@@ -1,12 +1,11 @@
 package com.nikatilio.quoteshare.ui.quotesmain
 
 import android.content.Context
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.nikatilio.quoteshare.R
-import com.nikatilio.quoteshare.data.Quote
+import com.nikatilio.quoteshare.data.model.Quote
 import com.nikatilio.quoteshare.utils.inflate
 import kotlinx.android.synthetic.main.quotes_list_item.view.*
 
@@ -38,6 +37,7 @@ class QuotesListAdapter(val context: Context): RecyclerView.Adapter<QuotesListAd
 
         fun bindQuote(quote: Quote) {
             view.quoteText.text = quote.body
+            view.authorText.text = quote.author
         }
     }
 }
