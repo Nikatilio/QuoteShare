@@ -1,7 +1,7 @@
 package com.nikatilio.quoteshare.network.api
 
-import com.nikatilio.quoteshare.data.QuoteInfo
-import com.nikatilio.quoteshare.data.QuotesList
+import com.nikatilio.quoteshare.data.model.QuoteInfo
+import com.nikatilio.quoteshare.data.model.QuotesList
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.Body

@@ -3,11 +3,9 @@ package com.nikatilio.quoteshare.ui.quotesmain
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.nikatilio.quoteshare.data.Quote
+import com.nikatilio.quoteshare.data.model.Quote
 import com.nikatilio.quoteshare.data.QuoteRepository
 import com.nikatilio.quoteshare.network.api.ApiFactory
-import com.nikatilio.quoteshare.network.api.User
-import com.nikatilio.quoteshare.network.api.UserCredentials
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

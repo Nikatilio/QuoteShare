@@ -17,7 +17,7 @@ object ApiFactory {
 
     // Create Auth Interceptor to add app authorization token to every request
     private val authInterceptor = Interceptor { chain ->
-        var appToken = AppConstants.favqsApiKey
+        var appToken = AppConstants.API_ACCESS_KEY
 
         val newRequest = chain.request()
             .newBuilder()
@@ -35,7 +35,7 @@ object ApiFactory {
 
     private fun retrofit() : Retrofit = Retrofit.Builder()
         .client(httpClient)
-        .baseUrl(AppConstants.baseApiUrl)
+        .baseUrl(AppConstants.API_BASE_URL)
         .addConverterFactory(MoshiConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()

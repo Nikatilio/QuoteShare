@@ -4,7 +4,8 @@ import com.nikatilio.quoteshare.BuildConfig
 
 class AppConstants {
     companion object {
-        var favqsApiKey = BuildConfig.FAVQS_API_KEY
-        var baseApiUrl = "https://favqs.com/"
+        val API_ACCESS_KEY = BuildConfig.FAVQS_API_KEY
+        val API_BASE_URL = "https://favqs.com/"
+        val DATABASE_NAME = "quote_database"
     }
 }
