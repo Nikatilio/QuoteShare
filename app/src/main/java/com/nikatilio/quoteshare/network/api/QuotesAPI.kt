@@ -2,6 +2,7 @@ package com.nikatilio.quoteshare.network.api
 
 import com.nikatilio.quoteshare.data.model.QuoteInfo
 import com.nikatilio.quoteshare.data.model.QuotesList
+import com.nikatilio.quoteshare.data.model.Typeahead
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.Body
@@ -22,5 +23,8 @@ interface QuotesAPI {
 
     @GET("/api/quotes/{id}")
     fun getQuote(@Path("id") id:Int): Deferred<Response<QuoteInfo>>
+
+    @GET("/api/typeahead")
+    fun getTypeahead(): Deferred<Response<Typeahead>>
 
 }

@@ -42,4 +42,11 @@ class QuotesListViewModel: ViewModel() {
             quotes.postValue(quotesList.quotes)
         }
     }
+
+    private fun loadTypeahead() {
+        scope.launch {
+            val typeahead = repository.getTypeahead()
+            println(typeahead)
+        }
+    }
 }
