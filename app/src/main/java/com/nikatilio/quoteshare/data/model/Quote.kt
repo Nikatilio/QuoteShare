@@ -17,16 +17,16 @@ data class QuotesList(
 
 @Entity
 data class Quote(
-    @PrimaryKey(autoGenerate = true) val uid: Int,
-    @ColumnInfo(name = "quote_id") val id: Int,
-    @ColumnInfo(name = "dialogue") val dialogue: Boolean,
-    @ColumnInfo(name = "private") val private: Boolean,
-    @ColumnInfo(name = "tags") val tags: List<String>,
-    @ColumnInfo(name = "url") val url: String,
-    @ColumnInfo(name = "favorites_count") val favorites_count: Int,
-    @ColumnInfo(name = "upvotes_count") val upvotes_count: Int,
-    @ColumnInfo(name = "downvotes_count") val downvotes_count: Int,
-    @ColumnInfo(name = "author") val author: String,
-    @ColumnInfo(name = "author_permalink") val author_permalink: String,
-    @ColumnInfo(name = "body") val body: String
+    @PrimaryKey(autoGenerate = true) var uid: Int = 0,
+    @ColumnInfo(name = "quote_id") var id: Int = 0,
+    @ColumnInfo(name = "dialogue") var dialogue: Boolean = false,
+    @ColumnInfo(name = "private") var private: Boolean = false,
+    @ColumnInfo(name = "tags") var tags: List<String> = arrayListOf(),
+    @ColumnInfo(name = "url") var url: String = "",
+    @ColumnInfo(name = "favorites_count") var favorites_count: Int = 0,
+    @ColumnInfo(name = "upvotes_count") var upvotes_count: Int = 0,
+    @ColumnInfo(name = "downvotes_count") var downvotes_count: Int = 0,
+    @ColumnInfo(name = "author") var author: String = "",
+    @ColumnInfo(name = "author_permalink") var author_permalink: String = "",
+    @ColumnInfo(name = "body") var body: String = ""
 )

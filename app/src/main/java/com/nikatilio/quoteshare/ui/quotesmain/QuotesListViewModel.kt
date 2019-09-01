@@ -10,9 +10,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
-class QuotesListViewModel: ViewModel() {
+class QuotesListViewModel @Inject constructor(private val repository: QuoteRepository): ViewModel() {
 
     private val parentJob = Job()
 
@@ -20,8 +21,6 @@ class QuotesListViewModel: ViewModel() {
         get() = parentJob + Dispatchers.Default
 
     private val scope = CoroutineScope(coroutineContext)
-
-    private val repository: QuoteRepository = QuoteRepository(ApiFactory.quotesApi)
 
     private val quotes: MutableLiveData<List<Quote>> by lazy {
         MutableLiveData<List<Quote>>().also {
