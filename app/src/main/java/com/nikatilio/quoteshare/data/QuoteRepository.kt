@@ -8,9 +8,7 @@ import com.nikatilio.quoteshare.network.api.QuotesAPI
 import com.nikatilio.quoteshare.network.api.Session
 import com.nikatilio.quoteshare.network.api.UserCredentials
 
-class QuoteRepository constructor(private val api: QuotesAPI): BaseRepository() {
-
-//    private var db: QuoteDatabase = QuoteDatabase.getDatabase(app)
+class QuoteRepository constructor(private val api: QuotesAPI, private val db: QuoteDatabase): BaseRepository() {
 
     suspend fun createSession(credentials: UserCredentials): Session? {
 

@@ -1,9 +1,6 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
-
 apply plugin: 'kotlin-kapt'
 
 android {
@@ -42,7 +39,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
     // ViewModel Kotlin support
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
     implementation 'androidx.appcompat:appcompat:1.0.2'
@@ -54,7 +52,7 @@ dependencies {
 
     // Room components
     implementation "androidx.room:room-runtime:$roomVersion"
-    annotationProcessor "androidx.room:room-compiler:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
     androidTestImplementation "androidx.room:room-testing:$roomVersion"
 
     // Moshi
@@ -69,6 +67,13 @@ dependencies {
     // Okhttp3
     implementation "com.squareup.okhttp3:okhttp:$okhttp3Version"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3Version"
+
+    // Dagger
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    implementation "com.google.dagger:dagger-android:$daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
 
     // Test
     testImplementation 'junit:junit:4.12'
