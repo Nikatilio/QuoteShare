@@ -5,15 +5,18 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.nikatilio.quoteshare.data.model.Quote
 import androidx.room.Room
-import android.icu.lang.UCharacter.GraphemeClusterBreak.V
 import androidx.room.TypeConverters
+import com.nikatilio.quoteshare.data.model.Typeahead
+import com.nikatilio.quoteshare.data.model.TypeaheadItem
 import com.nikatilio.quoteshare.utils.AppConstants.Companion.DATABASE_NAME
 
 
-@Database(entities = [Quote::class], version = 1)
+@Database(entities = [Quote::class, TypeaheadItem::class], version = 1)
 @TypeConverters(Converters::class)
 abstract class QuoteDatabase: RoomDatabase() {
+
     abstract fun quoteDao(): QuoteDao
+    abstract fun typeaheadItemDao(): TypeaheadItemDao
 
     companion object {
         @Volatile

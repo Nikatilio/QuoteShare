@@ -4,6 +4,7 @@ import com.nikatilio.quoteshare.data.db.QuoteDatabase
 import com.nikatilio.quoteshare.data.model.Quote
 import com.nikatilio.quoteshare.data.model.QuotesList
 import com.nikatilio.quoteshare.data.model.Typeahead
+import com.nikatilio.quoteshare.data.model.TypeaheadItem
 import com.nikatilio.quoteshare.network.api.QuotesAPI
 import com.nikatilio.quoteshare.network.api.Session
 import com.nikatilio.quoteshare.network.api.UserCredentials
@@ -43,16 +44,39 @@ class QuoteRepository constructor(private val api: QuotesAPI, private val db: Qu
         return quotesResponse!!
     }
 
-    suspend fun getTypeahead(): Typeahead? {
+    suspend fun getTypeaheadItems(): List<TypeaheadItem> {
 
-        val typeaheadResponse = safeApiCall(
-            call = { api.getTypeahead().await() },
-            errorMessage = "Error fetching typeahead"
-        )
+        var list = db.typeaheadItemDao().getAll()
+        if (list.isEmpty()) {
+            list = mutableListOf()
 
+            val typeaheadResponse = safeApiCall(
+                call = { api.getTypeahead().await() },
+                errorMessage = "Error fetching typeahead"
+            )
 
+            typeaheadResponse?.let { typeahead ->
+                typeahead.authors.forEach {
+                    it.type = "author"
+                }
+                list.addAll(typeahead.authors)
 
-        return typeaheadResponse
+                typeahead.tags.forEach {
+                    it.type = "tag"
+                }
+                list.addAll(typeahead.tags)
+
+                typeahead.users.forEach {
+                    it.type = "user"
+                }
+                list.addAll(typeahead.users)
+            }
+
+            db.typeaheadItemDao().addAll(list)
+
+        }
+
+        return list
     }
 
 

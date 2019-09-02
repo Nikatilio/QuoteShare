@@ -31,6 +31,9 @@ class ActivityQuotesMain: AppCompatActivity() {
             val adapter = quotesRecyclerView.adapter as QuotesListAdapter
             adapter.setQuotesList(it)
             adapter.notifyDataSetChanged()
+
+            // Check typeahead
+            model.getTypeahead()
         })
     }
 

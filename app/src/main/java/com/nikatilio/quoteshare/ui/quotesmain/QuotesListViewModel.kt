@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.nikatilio.quoteshare.data.model.Quote
 import com.nikatilio.quoteshare.data.QuoteRepository
-import com.nikatilio.quoteshare.network.api.ApiFactory
+import com.nikatilio.quoteshare.data.model.Typeahead
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -28,8 +28,18 @@ class QuotesListViewModel @Inject constructor(private val repository: QuoteRepos
         }
     }
 
+    private val typeahead: MutableLiveData<Typeahead> by lazy {
+        MutableLiveData<Typeahead>().also {
+            loadTypeahead()
+        }
+    }
+
     fun getQuotes(): LiveData<List<Quote>> {
         return quotes
+    }
+
+    fun getTypeahead(): LiveData<Typeahead> {
+        return typeahead
     }
 
     /*
@@ -44,7 +54,7 @@ class QuotesListViewModel @Inject constructor(private val repository: QuoteRepos
 
     private fun loadTypeahead() {
         scope.launch {
-            val typeahead = repository.getTypeahead()
+            val typeahead = repository.getTypeaheadItems()
             println(typeahead)
         }
     }
