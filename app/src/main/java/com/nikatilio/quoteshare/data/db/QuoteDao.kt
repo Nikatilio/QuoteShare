@@ -9,7 +9,7 @@ import com.nikatilio.quoteshare.data.model.Quote
 @Dao
 interface QuoteDao {
 
-    @Query("SELECT * FROM quote LIMIT 1")
+    @Query("SELECT * FROM quote")
     fun getAll(): List<Quote>
 
     @Query("SELECT * FROM quote WHERE uid IN (:quoteIds)")

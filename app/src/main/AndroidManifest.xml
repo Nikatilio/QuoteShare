@@ -22,7 +22,7 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme">
+            android:theme="@style/QuoteShare">
         <activity android:name=".ui.quotesmain.ActivityQuotesMain">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -42,6 +42,9 @@
             <meta-data android:name="android.accounts.AccountAuthenticator"
                     android:resource="@xml/service_authenticator"></meta-data>
         </service>
+        <meta-data
+                android:name="preloaded_fonts"
+                android:resource="@array/preloaded_fonts" />
 
     </application>
 
